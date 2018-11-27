@@ -1,0 +1,9 @@
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\bin\Debug\AgresiveMan.exe.config
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.csprojResolveAssemblyReference.cache
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.Form1.resources
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.Properties.Resources.resources
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.csproj.GenerateResource.Cache
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\bin\Debug\AgresiveMan.exe
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\bin\Debug\AgresiveMan.pdb
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.exe
+c:\users\ki11916\documents\visual studio 2015\Projects\AgresiveMan\AgresiveMan\obj\Debug\AgresiveMan.pdb
