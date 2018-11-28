@@ -10,6 +10,7 @@ namespace AgresiveMan
     {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
+        /// テストコメント
         /// </summary>
         [STAThread]
         static void Main()
