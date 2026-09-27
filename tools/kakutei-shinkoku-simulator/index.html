@@ -1135,13 +1135,6 @@ dl{margin:0}
     var n = parseFloat(v);
     t.value = isFinite(n) ? Math.round(n).toLocaleString("ja-JP") : "";
   });
-  document.addEventListener("focusin", function(ev){
-    var t = ev.target;
-    if(!t || t.tagName !== "INPUT" || t.type !== "text") return;
-    if(!t.closest(".money-field") && !t.classList.contains("count-field")) return;
-    t.value = String(t.value).replace(/,/g, "");
-  });
-
   syncVisibility();
   calc();
   var initial = document.querySelectorAll(".money-field input, .count-field");
