@@ -309,31 +309,31 @@ dl{margin:0}
       <summary><span class="sheet-title">収入金額等</span><span class="sheet-note">源泉徴収票・帳簿から</span></summary>
       <div class="sheet-body">
         <div class="row">
-          <div class="row-label">給与収入（額面）<small>源泉徴収票の「支払金額」。複数ある場合は合算</small></div>
+          <label class="row-label" for="i-kyuyo">給与収入（額面）<small>源泉徴収票の「支払金額」。複数ある場合は合算</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-kyuyo" value="5500000"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">源泉徴収税額<small>源泉徴収票の「源泉徴収税額」。年末調整済みならその額</small></div>
+          <label class="row-label" for="i-gensen">源泉徴収税額<small>源泉徴収票の「源泉徴収税額」。年末調整済みならその額</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-gensen" value="139500"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">事業（営業等・農業）収入</div>
+          <label class="row-label" for="i-jigyo-in">事業（営業等・農業）収入</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-jigyo-in" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">事業の必要経費</div>
+          <label class="row-label" for="i-jigyo-hi">事業の必要経費</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-jigyo-hi" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">不動産収入</div>
+          <label class="row-label" for="i-fudosan-in">不動産収入</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-fudosan-in" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">不動産の必要経費</div>
+          <label class="row-label" for="i-fudosan-hi">不動産の必要経費</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-fudosan-hi" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">青色申告特別控除<small>事業所得・不動産所得の合計から差し引きます</small></div>
+          <label class="row-label" for="i-aoiro">青色申告特別控除<small>事業所得・不動産所得の合計から差し引きます</small></label>
           <select id="i-aoiro">
             <option value="0" selected>適用しない（白色申告）</option>
             <option value="650000">65万円（電子申告・電子帳簿）</option>
@@ -342,26 +342,26 @@ dl{margin:0}
           </select>
         </div>
         <div class="row">
-          <div class="row-label">公的年金等の収入</div>
+          <label class="row-label" for="i-nenkin">公的年金等の収入</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-nenkin" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">年齢（年金の控除額判定）<small>その年の12月31日時点</small></div>
+          <label class="row-label" for="i-age">年齢（年金の控除額判定）<small>その年の12月31日時点</small></label>
           <select id="i-age">
             <option value="under" selected>65歳未満</option>
             <option value="over">65歳以上</option>
           </select>
         </div>
         <div class="row">
-          <div class="row-label">その他の雑所得（副業など）<small>収入から必要経費を引いた後の金額</small></div>
+          <label class="row-label" for="i-zatsu">その他の雑所得（副業など）<small>収入から必要経費を引いた後の金額</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-zatsu" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">一時所得の収入<small>満期保険金・懸賞金など。50万円の特別控除後、1/2が課税対象</small></div>
+          <label class="row-label" for="i-ichiji-in">一時所得の収入<small>満期保険金・懸賞金など。50万円の特別控除後、1/2が課税対象</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-ichiji-in" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">一時所得のために支出した金額</div>
+          <label class="row-label" for="i-ichiji-hi">一時所得のために支出した金額</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-ichiji-hi" value="0"><span class="unit">円</span></div>
         </div>
       </div>
@@ -371,39 +371,39 @@ dl{margin:0}
       <summary><span class="sheet-title">所得から差し引かれる金額</span><span class="sheet-note">保険料・医療費・寄附金</span></summary>
       <div class="sheet-body">
         <div class="row">
-          <div class="row-label">社会保険料<small>健康保険・厚生年金・国民年金・介護保険などの支払額</small></div>
+          <label class="row-label" for="i-shakai">社会保険料<small>健康保険・厚生年金・国民年金・介護保険などの支払額</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-shakai" value="820000"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">小規模企業共済等掛金<small>iDeCo・企業型DCのマッチング拠出・小規模企業共済</small></div>
+          <label class="row-label" for="i-idkeco">小規模企業共済等掛金<small>iDeCo・企業型DCのマッチング拠出・小規模企業共済</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-idkeco" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">生命保険料（一般・新制度）<small>平成24年以降に契約</small></div>
+          <label class="row-label" for="i-life-gn">生命保険料（一般・新制度）<small>平成24年以降に契約</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-life-gn" value="80000"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">生命保険料（一般・旧制度）<small>平成23年以前に契約</small></div>
+          <label class="row-label" for="i-life-go">生命保険料（一般・旧制度）<small>平成23年以前に契約</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-life-go" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">介護医療保険料（新制度）</div>
+          <label class="row-label" for="i-life-k">介護医療保険料（新制度）</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-life-k" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">個人年金保険料（新制度）</div>
+          <label class="row-label" for="i-life-nn">個人年金保険料（新制度）</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-life-nn" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">個人年金保険料（旧制度）</div>
+          <label class="row-label" for="i-life-no">個人年金保険料（旧制度）</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-life-no" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">地震保険料</div>
+          <label class="row-label" for="i-jishin">地震保険料</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-jishin" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">旧長期損害保険料<small>平成18年末までに契約した満期返戻金のある損害保険</small></div>
+          <label class="row-label" for="i-choki">旧長期損害保険料<small>平成18年末までに契約した満期返戻金のある損害保険</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-choki" value="0"><span class="unit">円</span></div>
         </div>
 
@@ -416,25 +416,25 @@ dl{margin:0}
           </div>
         </div>
         <div class="row" data-med="normal">
-          <div class="row-label">支払った医療費の合計</div>
+          <label class="row-label" for="i-iryo">支払った医療費の合計</label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-iryo" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row" data-med="normal">
-          <div class="row-label">保険金などで補填される金額<small>高額療養費・生命保険の入院給付金など</small></div>
+          <label class="row-label" for="i-hoten">保険金などで補填される金額<small>高額療養費・生命保険の入院給付金など</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-hoten" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row" data-med="self" hidden>
-          <div class="row-label">対象となる市販薬の購入額<small>スイッチOTC医薬品等。1.2万円を超えた分が対象（上限8.8万円）</small></div>
+          <label class="row-label" for="i-self">対象となる市販薬の購入額<small>スイッチOTC医薬品等。1.2万円を超えた分が対象（上限8.8万円）</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-self" value="0"><span class="unit">円</span></div>
         </div>
 
         <p class="sheet-lead">寄附金</p>
         <div class="row">
-          <div class="row-label">ふるさと納税の寄附額<small>ワンストップ特例を使わず確定申告する場合</small></div>
+          <label class="row-label" for="i-furusato">ふるさと納税の寄附額<small>ワンストップ特例を使わず確定申告する場合</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-furusato" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">その他の寄附金<small>認定NPO・政党・日本赤十字など</small></div>
+          <label class="row-label" for="i-kifu">その他の寄附金<small>認定NPO・政党・日本赤十字など</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-kifu" value="0"><span class="unit">円</span></div>
         </div>
       </div>
@@ -451,7 +451,7 @@ dl{margin:0}
           </div>
         </div>
         <div class="row" data-sp="yes" hidden>
-          <div class="row-label">配偶者の合計所得金額<small>給与のみなら「収入 − 給与所得控除」。年収123万円＝所得58万円</small></div>
+          <label class="row-label" for="i-sp-shotoku">配偶者の合計所得金額<small>給与のみなら「収入 − 給与所得控除」。年収123万円＝所得58万円</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-sp-shotoku" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row" data-sp="yes" hidden>
@@ -461,19 +461,19 @@ dl{margin:0}
 
         <p class="sheet-lead">扶養親族の人数（合計所得58万円以下の親族）</p>
         <div class="row">
-          <div class="row-label">一般の控除対象扶養親族<small>16〜18歳、23〜69歳</small></div>
+          <label class="row-label" for="i-f-ippan">一般の控除対象扶養親族<small>16〜18歳、23〜69歳</small></label>
           <input class="count-field" type="text" inputmode="numeric" id="i-f-ippan" value="1">
         </div>
         <div class="row">
-          <div class="row-label">特定扶養親族<small>19〜22歳で合計所得58万円以下</small></div>
+          <label class="row-label" for="i-f-tokutei">特定扶養親族<small>19〜22歳で合計所得58万円以下</small></label>
           <input class="count-field" type="text" inputmode="numeric" id="i-f-tokutei" value="0">
         </div>
         <div class="row">
-          <div class="row-label">老人扶養親族（同居老親等）<small>70歳以上の父母・祖父母と同居</small></div>
+          <label class="row-label" for="i-f-doukyo">老人扶養親族（同居老親等）<small>70歳以上の父母・祖父母と同居</small></label>
           <input class="count-field" type="text" inputmode="numeric" id="i-f-doukyo" value="0">
         </div>
         <div class="row">
-          <div class="row-label">老人扶養親族（その他）<small>70歳以上・同居以外</small></div>
+          <label class="row-label" for="i-f-rojin">老人扶養親族（その他）<small>70歳以上・同居以外</small></label>
           <input class="count-field" type="text" inputmode="numeric" id="i-f-rojin" value="0">
         </div>
 
@@ -492,15 +492,15 @@ dl{margin:0}
       <summary><span class="sheet-title">障害者・ひとり親など</span><span class="sheet-note">該当する場合のみ</span></summary>
       <div class="sheet-body">
         <div class="row">
-          <div class="row-label">障害者（一般）の人数<small>本人・同一生計配偶者・扶養親族</small></div>
+          <label class="row-label" for="i-sho-ippan">障害者（一般）の人数<small>本人・同一生計配偶者・扶養親族</small></label>
           <input class="count-field" type="text" inputmode="numeric" id="i-sho-ippan" value="0">
         </div>
         <div class="row">
-          <div class="row-label">特別障害者の人数</div>
+          <label class="row-label" for="i-sho-toku">特別障害者の人数</label>
           <input class="count-field" type="text" inputmode="numeric" id="i-sho-toku" value="0">
         </div>
         <div class="row">
-          <div class="row-label">同居特別障害者の人数</div>
+          <label class="row-label" for="i-sho-dou">同居特別障害者の人数</label>
           <input class="count-field" type="text" inputmode="numeric" id="i-sho-dou" value="0">
         </div>
         <div class="row">
@@ -526,15 +526,15 @@ dl{margin:0}
       <summary><span class="sheet-title">税金の計算</span><span class="sheet-note">税額控除・納付済みの税額</span></summary>
       <div class="sheet-body">
         <div class="row">
-          <div class="row-label">住宅借入金等特別控除（住宅ローン控除）<small>所得税から引ききれない分は住民税から控除します</small></div>
+          <label class="row-label" for="i-jutaku">住宅借入金等特別控除（住宅ローン控除）<small>所得税から引ききれない分は住民税から控除します</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-jutaku" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">その他の税額控除<small>配当控除・外国税額控除など</small></div>
+          <label class="row-label" for="i-zeigaku">その他の税額控除<small>配当控除・外国税額控除など</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-zeigaku" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <div class="row-label">予定納税額<small>第1期・第2期に納めた額</small></div>
+          <label class="row-label" for="i-yotei">予定納税額<small>第1期・第2期に納めた額</small></label>
           <div class="money-field"><input type="text" inputmode="numeric" id="i-yotei" value="0"><span class="unit">円</span></div>
         </div>
       </div>
