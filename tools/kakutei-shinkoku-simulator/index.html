@@ -100,6 +100,9 @@ h1{
   .results{position:sticky;top:18px}
 }
 
+/* 入力列・結果列はカードを16px間隔で縦に積む */
+.inputs, .results{display:flex;flex-direction:column;gap:16px}
+
 /* ---------- form sections ---------- */
 .sheet{
   background:var(--surface);
@@ -108,7 +111,6 @@ h1{
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-.sheet + .sheet{margin-top:16px}
 .sheet > summary{
   list-style:none;cursor:pointer;
   padding:12px 16px;
@@ -189,6 +191,7 @@ select:focus,.count-field:focus{outline:none;border-color:var(--focus);box-shado
 .btn:hover{background:var(--accent-soft)}
 .btn:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .btn-x{padding:7px 10px;color:var(--ink-3)}
+.kin-add{margin-top:8px}
 
 /* ---------- results ---------- */
 .verdict{
@@ -219,7 +222,7 @@ select:focus,.count-field:focus{outline:none;border-color:var(--focus);box-shado
 
 .panel{
   background:var(--surface);border:1px solid var(--rule);border-radius:3px;
-  box-shadow:var(--shadow);margin-top:16px;overflow:hidden;
+  box-shadow:var(--shadow);overflow:hidden;
 }
 .panel-head{
   padding:10px 16px;background:var(--surface-2);border-bottom:1px solid var(--rule);
@@ -247,6 +250,8 @@ select:focus,.count-field:focus{outline:none;border-color:var(--focus);box-shado
 .line.minus dd::before{content:"− ";color:var(--ink-3)}
 .line.nested dt{padding-left:14px;font-size:.79rem;color:var(--ink-3)}
 .line.nested dd{font-size:.79rem;color:var(--ink-3);font-weight:400}
+.line.group-start{margin-top:10px}
+.rate-note{color:var(--ink-3);font-size:.75rem}
 dl{margin:0}
 
 .callout{
@@ -280,7 +285,7 @@ dl{margin:0}
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   font-size:.76rem;color:var(--ink-2);
   border:1px dashed var(--rule-strong);border-radius:3px;
-  padding:9px 13px;margin-bottom:16px;background:var(--surface);
+  padding:9px 13px;background:var(--surface);
 }
 .sample-flag strong{color:var(--accent);font-weight:700;font-size:.72rem;letter-spacing:.06em}
 .sample-flag .btn{margin-left:auto}
@@ -375,8 +380,8 @@ dl{margin:0}
           <div class="money-field"><input type="text" inputmode="numeric" id="i-shakai" value="820000"><span class="unit">円</span></div>
         </div>
         <div class="row">
-          <label class="row-label" for="i-idkeco">小規模企業共済等掛金<small>iDeCo・企業型DCのマッチング拠出・小規模企業共済</small></label>
-          <div class="money-field"><input type="text" inputmode="numeric" id="i-idkeco" value="0"><span class="unit">円</span></div>
+          <label class="row-label" for="i-kakekin">小規模企業共済等掛金<small>iDeCo・企業型DCのマッチング拠出・小規模企業共済</small></label>
+          <div class="money-field"><input type="text" inputmode="numeric" id="i-kakekin" value="0"><span class="unit">円</span></div>
         </div>
         <div class="row">
           <label class="row-label" for="i-life-gn">生命保険料（一般・新制度）<small>平成24年以降に契約</small></label>
@@ -482,7 +487,7 @@ dl{margin:0}
           <div class="row-label">対象者の合計所得金額<small>19〜22歳で合計所得58万円超123万円以下（給与収入123万円超188万円以下）。1人ずつ追加してください</small></div>
           <div>
             <div class="kin-list" id="kin-list"></div>
-            <button type="button" class="btn" id="btn-add-kin" style="margin-top:8px">対象者を追加</button>
+            <button type="button" class="btn kin-add" id="btn-add-kin">対象者を追加</button>
           </div>
         </div>
       </div>
@@ -562,7 +567,7 @@ dl{margin:0}
           <div class="line" id="row-chosei"><dt>所得金額調整控除</dt><dd class="mono" id="r-chosei">0</dd></div>
           <div class="line sum"><dt>合計所得金額</dt><dd class="mono" id="r-gokei">0</dd></div>
 
-          <div class="line minus" style="margin-top:10px"><dt>所得控除の合計</dt><dd class="mono" id="r-kojo-gokei">0</dd></div>
+          <div class="line minus group-start"><dt>所得控除の合計</dt><dd class="mono" id="r-kojo-gokei">0</dd></div>
           <div class="line nested"><dt>基礎控除</dt><dd class="mono" id="r-kiso">0</dd></div>
           <div class="line nested"><dt>社会保険料控除</dt><dd class="mono" id="r-shakai">0</dd></div>
           <div class="line nested" id="row-kkojo"><dt>小規模企業共済等掛金控除</dt><dd class="mono" id="r-kkojo">0</dd></div>
@@ -576,7 +581,7 @@ dl{margin:0}
           <div class="line nested" id="row-sonota"><dt>障害者・寡婦・勤労学生控除</dt><dd class="mono" id="r-sonota">0</dd></div>
 
           <div class="line sum"><dt>課税される所得金額</dt><dd class="mono" id="r-kazei">0</dd></div>
-          <div class="line"><dt>所得税額<span id="r-rate-note" style="color:var(--ink-3);font-size:.75rem"></span></dt><dd class="mono" id="r-zeigaku">0</dd></div>
+          <div class="line"><dt>所得税額<span id="r-rate-note" class="rate-note"></span></dt><dd class="mono" id="r-zeigaku">0</dd></div>
           <div class="line minus" id="row-zeikojo"><dt>税額控除</dt><dd class="mono" id="r-zeikojo">0</dd></div>
           <div class="line"><dt>復興特別所得税（2.1%）</dt><dd class="mono" id="r-fukko">0</dd></div>
           <div class="line sum"><dt>申告納税額（年税額）</dt><dd class="mono" id="r-nenzei">0</dd></div>
@@ -630,17 +635,605 @@ dl{margin:0}
   </div>
 </div>
 
+<script id="tax-engine">
+/*
+ * 確定申告シミュレータの計算エンジン
+ *
+ * 画面（DOM）に依存しない計算だけを置いています。ブラウザでは window.TaxEngine として使います。
+ * 1ファイルで配布できるよう index.html に埋め込み、テストはこのブロックを取り出して Node で実行します。
+ *
+ * - 年分ごとに変わる税額表・控除額は RULES に年分ごとのデータとしてまとめています。
+ *   新しい年分に対応するときは、RULES.R7 を元に年分を足し、変わった表だけを差し替えます。
+ *   複製に JSON.parse(JSON.stringify(...)) は使わないこと（表の上限の Infinity が null になる）。
+ * - simulate(入力, ルール) が計算結果を返します。入力の項目は emptyInput() を見てください。
+ * - テスト：node --test tools/kakutei-shinkoku-simulator/tax-engine.test.js
+ */
+(function(root, factory){
+  var api = factory();
+  if(typeof module === "object" && module.exports){
+    module.exports = api;
+  } else {
+    root.TaxEngine = api;
+  }
+})(typeof globalThis !== "undefined" ? globalThis : this, function(){
+  "use strict";
+
+  /* ---------- 表の引き方 ---------- */
+
+  // 表の各行は [上限, …]。x が上限以下になる最初の行を返す
+  function findRow(table, x){
+    for(var i = 0; i < table.length; i++){
+      if(x <= table[i][0]) return table[i];
+    }
+    return table[table.length - 1];
+  }
+  // 最後の行の上限を超えたら null（対象外）
+  function findRowWithin(table, x){
+    return x <= table[table.length - 1][0] ? findRow(table, x) : null;
+  }
+  // [上限, 値] の表を引く
+  function lookup(table, x){
+    return findRow(table, x)[1];
+  }
+  // [上限, 率, 加算額] の速算式の表で「x × 率 ＋ 加算額」を求める。0以下は0
+  function sokusan(table, x){
+    if(x <= 0) return 0;
+    var row = findRow(table, x);
+    return x * row[1] + row[2];
+  }
+  // unit 未満を切り捨てる（課税所得は1,000円、年税額は100円）
+  function kirisute(x, unit){
+    return Math.floor(x / unit) * unit;
+  }
+
+  // 控除額を「所得税・住民税・人的控除差」の組で持つ。人的控除差は住民税の調整控除に使う
+  function kingaku(shotokuzei, juminzei, sa){
+    return { shotokuzei: shotokuzei, juminzei: juminzei, sa: sa };
+  }
+  var ZERO = Object.freeze(kingaku(0, 0, 0));
+
+  /* ---------- 令和7年分のルール ---------- */
+
+  var R7 = {
+    nenbun: "令和7年分",
+
+    // 給与所得控除：[給与収入の上限, 率, 加算額]。控除額は給与収入を超えない（最低保障65万円）
+    kyuyoKojo: [
+      [ 1900000, 0,    650000],
+      [ 3600000, 0.3,   80000],
+      [ 6600000, 0.2,  440000],
+      [ 8500000, 0.1, 1100000],
+      [Infinity, 0,   1950000]
+    ],
+
+    // 公的年金等控除
+    nenkinKojo: {
+      // 公的年金等以外の合計所得金額に応じて控除額から差し引く額：[上限, 減額]
+      gengaku: [[10000000, 0], [20000000, 100000], [Infinity, 200000]],
+      // 最低保障額と、それが適用される収入の上限
+      under65: { saitei:  600000, saiteiMade: 1300000 },
+      over65:  { saitei: 1100000, saiteiMade: 3300000 },
+      // 最低保障を超える収入の速算式：[収入の上限, 率, 加算額]
+      sokusan: [
+        [ 4100000, 0.25,  275000],
+        [ 7700000, 0.15,  685000],
+        [10000000, 0.05, 1455000],
+        [Infinity, 0,    1955000]
+      ]
+    },
+
+    // 所得金額調整控除：(1) 給与850万円超の子育て・介護、(2) 給与と年金の併給
+    shotokuChosei: { kyuyoKara: 8500000, kyuyoJogen: 10000000, ritsu: 0.1, heikyuJogen: 100000 },
+
+    // 一時所得の特別控除（控除後の1/2が総所得に入る）
+    ichijiTokubetsuKojo: 500000,
+
+    // 基礎控除：[合計所得金額の上限, 控除額]（令和7・8年分限定の上乗せ特例を含む）
+    kiso: [
+      [ 1320000, 950000],
+      [ 3360000, 880000],
+      [ 4890000, 680000],
+      [ 6550000, 630000],
+      [23500000, 580000],
+      [24000000, 480000],
+      [24500000, 320000],
+      [25000000, 160000],
+      [Infinity,      0]
+    ],
+
+    // 生命保険料控除：区分ごとの速算式と、新旧併用時・3区分合計の上限
+    seimei: {
+      shotokuzei: {
+        shin: [[20000, 1, 0], [40000, 0.5, 10000], [ 80000, 0.25, 20000], [Infinity, 0, 40000]],
+        kyu:  [[25000, 1, 0], [50000, 0.5, 12500], [100000, 0.25, 25000], [Infinity, 0, 50000]],
+        heiyoJogen: 40000,
+        gokeiJogen: 120000
+      },
+      juminzei: {
+        shin: [[12000, 1, 0], [32000, 0.5, 6000], [56000, 0.25, 14000], [Infinity, 0, 28000]],
+        kyu:  [[15000, 1, 0], [40000, 0.5, 7500], [70000, 0.25, 17500], [Infinity, 0, 35000]],
+        heiyoJogen: 28000,
+        gokeiJogen: 70000
+      }
+    },
+
+    // 地震保険料控除：地震保険料の算入率・上限、旧長期損害保険料の速算式、合計の上限
+    jishin: {
+      shotokuzei: { jishinRitsu: 1,   jishinJogen: 50000, choki: [[10000, 1, 0], [20000, 0.5, 5000], [Infinity, 0, 15000]], gokeiJogen: 50000 },
+      juminzei:   { jishinRitsu: 0.5, jishinJogen: 25000, choki: [[ 5000, 1, 0], [15000, 0.5, 2500], [Infinity, 0, 10000]], gokeiJogen: 25000 }
+    },
+
+    // 医療費控除の足切り（10万円か総所得金額等の5%の低い方）とセルフメディケーション税制
+    iryo: { ashikiri: 100000, ashikiriRitsu: 0.05, jogen: 2000000 },
+    selfMed: { ashikiri: 12000, jogen: 88000 },
+
+    // 寄附金控除（所得税）：総所得金額等の40%が上限、2,000円を差し引く
+    kifu: { shotokuRitsu: 0.4, ashikiri: 2000 },
+
+    // 配偶者控除・配偶者特別控除。金額の配列は本人の合計所得金額の区分（900万・950万・1,000万円以下）の順
+    haigu: {
+      honninKubun: [9000000, 9500000, 10000000],
+      shotokuYoken: 580000,
+      ippan: { shotokuzei: [380000, 260000, 130000], juminzei: [330000, 220000, 110000], sa: [ 50000, 40000, 20000] },
+      rojin: { shotokuzei: [480000, 320000, 160000], juminzei: [380000, 260000, 130000], sa: [100000, 60000, 30000] },
+      // 配偶者特別控除：[配偶者の合計所得金額の上限, 所得税, 住民税]
+      tokubetsu: [
+        [ 950000, [380000, 260000, 130000], [330000, 220000, 110000]],
+        [1000000, [360000, 240000, 120000], [330000, 220000, 110000]],
+        [1050000, [310000, 210000, 110000], [310000, 210000, 110000]],
+        [1100000, [260000, 180000,  90000], [260000, 180000,  90000]],
+        [1150000, [210000, 140000,  70000], [210000, 140000,  70000]],
+        [1200000, [160000, 110000,  60000], [160000, 110000,  60000]],
+        [1250000, [110000,  80000,  40000], [110000,  80000,  40000]],
+        [1300000, [ 60000,  40000,  20000], [ 60000,  40000,  20000]],
+        [1330000, [ 30000,  20000,  10000], [ 30000,  20000,  10000]]
+      ],
+      // 人的控除差が生じるのは配偶者の合計所得金額がこの額以下のとき
+      tokubetsuSaMade: 950000,
+      tokubetsuSa: [50000, 40000, 20000]
+    },
+
+    // 扶養控除（1人あたり）
+    fuyo: {
+      ippan:   kingaku(380000, 330000,  50000),
+      tokutei: kingaku(630000, 450000, 180000),
+      dokyo:   kingaku(580000, 450000, 130000),
+      rojin:   kingaku(480000, 380000, 100000)
+    },
+
+    // 特定親族特別控除：[親族の合計所得金額の上限, 所得税, 住民税]
+    tokuteiShinzoku: {
+      shotokuKara: 580000,
+      hyo: [
+        [ 850000, 630000, 450000],
+        [ 900000, 610000, 450000],
+        [ 950000, 510000, 450000],
+        [1000000, 410000, 410000],
+        [1050000, 310000, 310000],
+        [1100000, 210000, 210000],
+        [1150000, 110000, 110000],
+        [1200000,  60000,  60000],
+        [1230000,  30000,  30000]
+      ],
+      saMade: 950000,
+      sa: 180000
+    },
+
+    // 障害者控除（1人あたり）・寡婦控除・ひとり親控除・勤労学生控除
+    shogai: {
+      ippan:     kingaku(270000, 260000,  10000),
+      tokubetsu: kingaku(400000, 300000, 100000),
+      dokyo:     kingaku(750000, 530000, 220000)
+    },
+    hitori: {
+      kafu:      kingaku(270000, 260000, 10000),
+      hitorioya: kingaku(350000, 300000, 50000)
+    },
+    kinro: kingaku(270000, 260000, 10000),
+
+    // 所得税の速算表：[課税所得金額の上限, 税率, 控除額]
+    zeiritsu: [
+      [ 1950000, 0.05,       0],
+      [ 3300000, 0.10,   97500],
+      [ 6950000, 0.20,  427500],
+      [ 9000000, 0.23,  636000],
+      [18000000, 0.33, 1536000],
+      [40000000, 0.40, 2796000],
+      [Infinity, 0.45, 4796000]
+    ],
+    fukkoRitsu: 0.021,
+
+    // 住民税（標準税率の自治体を前提とした概算）
+    jumin: {
+      kiso: [[24000000, 430000], [24500000, 290000], [25000000, 150000], [Infinity, 0]],
+      ritsu: 0.10,
+      // 調整控除：基礎控除の人的控除差、合計課税所得金額の境目、最低額、税率
+      chosei: { kisoSa: 50000, sakai: 2000000, saitei: 50000, ritsu: 0.05 },
+      // ふるさと納税（寄附金税額控除）：自己負担2,000円、基本分の税率・対象上限、
+      // 特例分の率（90%−所得税率×1.021）、所得割の20%上限
+      furusato: { ashikiri: 2000, kihonRitsu: 0.10, shotokuRitsu: 0.3, tokureiRitsu: 0.9, fukkoBairitsu: 1.021, jogenRitsu: 0.2 },
+      // 住宅ローン控除の住民税分：所得税の課税総所得金額等×5%（上限9.75万円）
+      jutaku: { ritsu: 0.05, jogen: 97500 },
+      // 均等割（森林環境税を含む）と、均等割の非課税限度額（1級地）
+      kintowari: 5000,
+      hikazei: { tanshin: 450000, hitoriAtari: 350000, kasan: 100000, fuyoKasan: 210000 }
+    }
+  };
+
+  var RULES = { R7: deepFreeze(R7) };
+
+  function deepFreeze(obj){
+    Object.keys(obj).forEach(function(key){
+      var v = obj[key];
+      if(v && typeof v === "object") deepFreeze(v);
+    });
+    return Object.freeze(obj);
+  }
+
+  /* ---------- 入力 ---------- */
+
+  // 入力の全項目と既定値。金額は円、人数は人
+  function emptyInput(){
+    return {
+      kyuyoShunyu: 0,        // 給与収入（額面）
+      gensen: 0,             // 源泉徴収税額
+      jigyoShunyu: 0,        // 事業収入（負の値も可）
+      jigyoKeihi: 0,
+      fudosanShunyu: 0,      // 不動産収入（負の値も可）
+      fudosanKeihi: 0,
+      aoiro: 0,              // 青色申告特別控除の額
+      nenkinShunyu: 0,       // 公的年金等の収入
+      over65: false,
+      zatsu: 0,              // その他の雑所得
+      ichijiShunyu: 0,       // 一時所得（負の値も可）
+      ichijiShishutsu: 0,
+      shakai: 0,             // 社会保険料
+      kakekin: 0,            // 小規模企業共済等掛金（iDeCoなど）
+      seimei: { ippanShin: 0, ippanKyu: 0, kaigo: 0, nenkinShin: 0, nenkinKyu: 0 },
+      jishin: 0,             // 地震保険料
+      choki: 0,              // 旧長期損害保険料
+      iryo: { self: false, shiharai: 0, hoten: 0, otc: 0 },
+      furusato: 0,           // ふるさと納税の寄附額
+      sonotaKifu: 0,         // ふるさと納税以外の寄附金
+      haigu: { ari: false, shotoku: 0, rojin: false },
+      fuyo: { ippan: 0, tokutei: 0, dokyo: 0, rojin: 0 },
+      tokuteiShinzoku: [],   // 特定親族それぞれの合計所得金額
+      shogai: { ippan: 0, tokubetsu: 0, dokyo: 0 },
+      hitori: "none",        // "none" | "kafu" | "hitorioya"
+      kinro: false,
+      choseiYoken: false,    // 所得金額調整控除（給与850万円超）の要件に該当
+      jutaku: 0,             // 住宅借入金等特別控除
+      zeigakuKojo: 0,        // その他の税額控除
+      yotei: 0               // 予定納税額
+    };
+  }
+
+  // 足りない項目を既定値で補う。知らない項目名や型の違う値は、書き間違いとして止める
+  function normalize(input){
+    var base = emptyInput();
+    Object.keys(input || {}).forEach(function(key){
+      if(!Object.prototype.hasOwnProperty.call(base, key)){
+        throw new Error("知らない入力項目です: " + key);
+      }
+      var v = input[key];
+      var def = base[key];
+      if(Array.isArray(def)){
+        if(!Array.isArray(v) || !v.every(isAmount)) throw new Error("数値の配列ではありません: " + key);
+        base[key] = v.slice();
+      } else if(def && typeof def === "object"){
+        Object.keys(v || {}).forEach(function(sub){
+          if(!Object.prototype.hasOwnProperty.call(def, sub)){
+            throw new Error("知らない入力項目です: " + key + "." + sub);
+          }
+          def[sub] = checkType(key + "." + sub, def[sub], v[sub]);
+        });
+      } else {
+        base[key] = checkType(key, def, v);
+      }
+    });
+    return base;
+  }
+  function isAmount(v){
+    return typeof v === "number" && isFinite(v);
+  }
+  // 既定値と同じ型か調べる。数値は有限であること
+  function checkType(name, def, v){
+    var ok = typeof def === "number" ? isAmount(v) : typeof v === typeof def;
+    if(!ok) throw new Error("入力の値の型が違います: " + name + " = " + JSON.stringify(v));
+    return v;
+  }
+
+  /* ---------- 控除ごとの計算 ---------- */
+
+  function nenkinKojo(T, shunyu, over65, hokaShotoku){
+    if(shunyu <= 0) return 0;
+    var gengaku = lookup(T.gengaku, hokaShotoku);
+    var S = over65 ? T.over65 : T.under65;
+    var saitei = S.saitei - gengaku;
+    var v = shunyu <= S.saiteiMade ? saitei : sokusan(T.sokusan, shunyu) - gengaku;
+    return Math.max(saitei, Math.min(v, shunyu));
+  }
+
+  // 生命保険料の1区分。新旧両方あるときは「旧だけ」と「新旧合計（上限あり）」の有利な方
+  function seimeiKubun(T, shin, kyu){
+    if(shin > 0 && kyu > 0) return Math.max(sokusan(T.kyu, kyu), Math.min(T.heiyoJogen, sokusan(T.shin, shin) + sokusan(T.kyu, kyu)));
+    if(kyu > 0) return sokusan(T.kyu, kyu);
+    return sokusan(T.shin, shin);
+  }
+  function seimeiKojo(T, s){
+    var total = seimeiKubun(T, s.ippanShin, s.ippanKyu)
+              + seimeiKubun(T, s.kaigo, 0)
+              + seimeiKubun(T, s.nenkinShin, s.nenkinKyu);
+    return Math.min(T.gokeiJogen, total);
+  }
+
+  function jishinKojo(T, jishin, choki){
+    return Math.min(T.gokeiJogen, Math.min(T.jishinJogen, jishin * T.jishinRitsu) + sokusan(T.choki, choki));
+  }
+
+  function iryoKojo(R, iryo, gokei){
+    if(iryo.self) return Math.min(R.selfMed.jogen, Math.max(0, iryo.otc - R.selfMed.ashikiri));
+    var ashikiri = Math.min(R.iryo.ashikiri, gokei * R.iryo.ashikiriRitsu);
+    return Math.min(R.iryo.jogen, Math.max(0, iryo.shiharai - iryo.hoten - ashikiri));
+  }
+
+  // 配偶者控除・配偶者特別控除。tokubetsu は配偶者特別控除の区分に入ったかどうか
+  function haiguKojo(T, haigu, gokei){
+    var kubun = -1;
+    for(var i = 0; i < T.honninKubun.length; i++){
+      if(gokei <= T.honninKubun[i]){ kubun = i; break; }
+    }
+    var out = kingaku(0, 0, 0);
+    out.tokubetsu = false;
+    if(!haigu.ari || kubun < 0) return out;
+    if(haigu.shotoku <= T.shotokuYoken){
+      var A = haigu.rojin ? T.rojin : T.ippan;
+      out.shotokuzei = A.shotokuzei[kubun];
+      out.juminzei = A.juminzei[kubun];
+      out.sa = A.sa[kubun];
+      return out;
+    }
+    var row = findRowWithin(T.tokubetsu, haigu.shotoku);
+    if(!row) return out;
+    out.tokubetsu = true;
+    out.shotokuzei = row[1][kubun];
+    out.juminzei = row[2][kubun];
+    if(haigu.shotoku <= T.tokubetsuSaMade) out.sa = T.tokubetsuSa[kubun];
+    return out;
+  }
+
+  // 人数 × 1人あたりの額（扶養控除・障害者控除）
+  function ninzubun(table, counts){
+    var out = kingaku(0, 0, 0);
+    Object.keys(table).forEach(function(key){
+      var n = counts[key];
+      out.shotokuzei += n * table[key].shotokuzei;
+      out.juminzei   += n * table[key].juminzei;
+      out.sa         += n * table[key].sa;
+    });
+    return out;
+  }
+
+  function tokuteiShinzokuKojo(T, list){
+    var out = kingaku(0, 0, 0);
+    list.forEach(function(s){
+      if(s <= T.shotokuKara) return;
+      var row = findRowWithin(T.hyo, s);
+      if(!row) return;
+      out.shotokuzei += row[1];
+      out.juminzei += row[2];
+      if(s <= T.saMade) out.sa += T.sa;
+    });
+    return out;
+  }
+
+  /* ---------- 全体の計算 ---------- */
+
+  function simulate(rawInput, rules){
+    var input = normalize(rawInput);
+    var R = rules || RULES.R7;
+    var J = R.jumin;
+
+    // --- 所得 ---
+    var kyuyoShunyu = input.kyuyoShunyu;
+    var kyuyoKojo = Math.min(kyuyoShunyu, sokusan(R.kyuyoKojo, kyuyoShunyu));
+    var kyuyo = Math.max(0, kyuyoShunyu - kyuyoKojo);
+
+    // 事業所得と不動産所得は合算してから青色申告特別控除を差し引く
+    var jigyo = (input.jigyoShunyu - input.jigyoKeihi) + (input.fudosanShunyu - input.fudosanKeihi);
+    jigyo = jigyo - Math.min(input.aoiro, Math.max(0, jigyo));
+
+    var zatsu = input.zatsu;
+    var ichiji = Math.max(0, input.ichijiShunyu - input.ichijiShishutsu - R.ichijiTokubetsuKojo) / 2;
+
+    var nenkinShunyu = input.nenkinShunyu;
+    var nenkin = Math.max(0, nenkinShunyu - nenkinKojo(R.nenkinKojo, nenkinShunyu, input.over65, kyuyo + jigyo + zatsu + ichiji));
+
+    var C = R.shotokuChosei;
+    var chosei1 = 0;
+    if(input.choseiYoken && kyuyoShunyu > C.kyuyoKara){
+      chosei1 = (Math.min(kyuyoShunyu, C.kyuyoJogen) - C.kyuyoKara) * C.ritsu;
+    }
+    var kyuyoAdj = Math.max(0, kyuyo - chosei1);
+    var chosei2 = 0;
+    if(kyuyoAdj > 0 && nenkin > 0){
+      chosei2 = Math.max(0, Math.min(kyuyoAdj, C.heikyuJogen) + Math.min(nenkin, C.heikyuJogen) - C.heikyuJogen);
+    }
+    var kyuyoFinal = Math.max(0, kyuyoAdj - Math.min(chosei2, kyuyoAdj));
+
+    var gokei = Math.max(0, kyuyoFinal + jigyo + nenkin + zatsu + ichiji);
+
+    // --- 所得控除（所得税・住民税） ---
+    var shakai = input.shakai;
+    var kakekin = input.kakekin;
+    var seimeiI = seimeiKojo(R.seimei.shotokuzei, input.seimei);
+    var seimeiJ = seimeiKojo(R.seimei.juminzei, input.seimei);
+    var jishinI = jishinKojo(R.jishin.shotokuzei, input.jishin, input.choki);
+    var jishinJ = jishinKojo(R.jishin.juminzei, input.jishin, input.choki);
+    var iryo = iryoKojo(R, input.iryo, gokei);
+    var kifu = Math.max(0, Math.min(input.furusato + input.sonotaKifu, gokei * R.kifu.shotokuRitsu) - R.kifu.ashikiri);
+    var haigu = haiguKojo(R.haigu, input.haigu, gokei);
+    var fuyo = ninzubun(R.fuyo, input.fuyo);
+    var shinzoku = tokuteiShinzokuKojo(R.tokuteiShinzoku, input.tokuteiShinzoku);
+    var shogai = ninzubun(R.shogai, input.shogai);
+    var hitori = Object.prototype.hasOwnProperty.call(R.hitori, input.hitori) ? R.hitori[input.hitori] : ZERO;
+    var kinro = input.kinro ? R.kinro : ZERO;
+    var sonotaI = shogai.shotokuzei + hitori.shotokuzei + kinro.shotokuzei;
+    var sonotaJ = shogai.juminzei + hitori.juminzei + kinro.juminzei;
+    var kiso = lookup(R.kiso, gokei);
+    var kisoJ = lookup(J.kiso, gokei);
+
+    var kojoI = kiso + shakai + kakekin + seimeiI + jishinI + iryo + kifu + haigu.shotokuzei + fuyo.shotokuzei + shinzoku.shotokuzei + sonotaI;
+    var kojoJ = kisoJ + shakai + kakekin + seimeiJ + jishinJ + iryo + haigu.juminzei + fuyo.juminzei + shinzoku.juminzei + sonotaJ;
+
+    // --- 所得税 ---
+    var kazei = Math.max(0, kirisute(gokei - kojoI, 1000));
+    var zeiritsu = findRow(R.zeiritsu, kazei);
+    var zeigaku = Math.max(0, kazei * zeiritsu[1] - zeiritsu[2]);
+
+    // 税額控除は「その他」を先に、住宅ローン控除を後に当てる。引ききれない住宅ローン控除は住民税へ
+    var zeigakuKojo = Math.min(zeigaku, input.zeigakuKojo + input.jutaku);
+    var jutakuUsed = Math.max(0, Math.min(input.jutaku, zeigaku - Math.min(zeigaku, input.zeigakuKojo)));
+    var jutakuNokori = input.jutaku - jutakuUsed;
+
+    var kijun = Math.max(0, zeigaku - zeigakuKojo);
+    var fukko = Math.floor(kijun * R.fukkoRitsu);
+    var nenzei = kirisute(kijun + fukko, 100);
+    var sashihiki = nenzei - input.gensen - input.yotei;
+
+    // --- 住民税（概算） ---
+    var kazeiJ = Math.max(0, kirisute(gokei - kojoJ, 1000));
+    var shotokuwari = kazeiJ * J.ritsu;
+
+    var jinteki = J.chosei.kisoSa + haigu.sa + fuyo.sa + shinzoku.sa + shogai.sa + hitori.sa + kinro.sa;
+    var chosei = 0;
+    if(kazeiJ > 0){
+      if(kazeiJ <= J.chosei.sakai){
+        chosei = Math.min(jinteki, kazeiJ) * J.chosei.ritsu;
+      } else {
+        chosei = Math.max(J.chosei.saitei, jinteki - (kazeiJ - J.chosei.sakai)) * J.chosei.ritsu;
+      }
+    }
+    var wari = Math.max(0, shotokuwari - chosei);
+
+    var F = J.furusato;
+    var kifuJ = 0;
+    if(input.furusato > 0){
+      var kihon = Math.max(0, Math.min(input.furusato, gokei * F.shotokuRitsu) - F.ashikiri) * F.kihonRitsu;
+      var tokurei = Math.min(wari * F.jogenRitsu, Math.max(0, input.furusato - F.ashikiri) * (F.tokureiRitsu - zeiritsu[1] * F.fukkoBairitsu));
+      kifuJ = kihon + tokurei;
+    }
+
+    var jutakuJ = 0;
+    if(jutakuNokori > 0){
+      jutakuJ = Math.min(jutakuNokori, Math.min(kazei * J.jutaku.ritsu, J.jutaku.jogen));
+    }
+
+    var wariFinal = Math.max(0, wari - kifuJ - jutakuJ);
+    var H = J.hikazei;
+    var fuyoNinzu = input.fuyo.ippan + input.fuyo.tokutei + input.fuyo.dokyo + input.fuyo.rojin + input.tokuteiShinzoku.length;
+    var ninzu = 1 + (input.haigu.ari && input.haigu.shotoku <= R.haigu.shotokuYoken ? 1 : 0) + fuyoNinzu;
+    var hikazeiGendo = ninzu > 1 ? (H.hitoriAtari * ninzu + H.kasan + H.fuyoKasan) : H.tanshin;
+    var kintowari = gokei <= hikazeiGendo ? 0 : J.kintowari;
+    var juminzei = kirisute(wariFinal + kintowari, 100);
+
+    // --- ふるさと納税の上限の目安（ふるさと納税をしなかった場合の税率と所得割で求める） ---
+    var genkaiZeiritsu = zeiritsu[1];
+    if(input.furusato > 0){
+      var kojoNashi = kojoI - kifu + Math.max(0, Math.min(input.sonotaKifu, gokei * R.kifu.shotokuRitsu) - R.kifu.ashikiri);
+      genkaiZeiritsu = findRow(R.zeiritsu, Math.max(0, kirisute(gokei - kojoNashi, 1000)))[1];
+    }
+    var bunbo = F.tokureiRitsu - genkaiZeiritsu * F.fukkoBairitsu;
+    var furusatoJogen = (wari > 0 && bunbo > 0) ? kirisute(wari * F.jogenRitsu / bunbo + F.ashikiri, 1000) : 0;
+
+    // --- まとめ ---
+    var shunyu = kyuyoShunyu + (input.jigyoShunyu - input.jigyoKeihi) + (input.fudosanShunyu - input.fudosanKeihi)
+               + nenkinShunyu + zatsu + Math.max(0, input.ichijiShunyu - input.ichijiShishutsu);
+    var futan = shakai + nenzei + juminzei;
+
+    return {
+      nenbun: R.nenbun,
+      shotoku: {
+        kyuyoShunyu: kyuyoShunyu,
+        kyuyoKojo: kyuyoKojo,
+        kyuyo: kyuyoFinal,
+        jigyo: jigyo,
+        nenkinShunyu: nenkinShunyu,
+        nenkin: nenkin,
+        zatsu: zatsu,
+        ichiji: ichiji,
+        chosei: chosei1 + chosei2,
+        gokei: gokei
+      },
+      kojo: {
+        kiso: kiso,
+        shakai: shakai,
+        kakekin: kakekin,
+        seimei: seimeiI,
+        jishin: jishinI,
+        iryo: iryo,
+        iryoSelf: input.iryo.self,
+        kifu: kifu,
+        haigu: haigu.shotokuzei,
+        haiguTokubetsu: haigu.tokubetsu,
+        fuyo: fuyo.shotokuzei,
+        tokuteiShinzoku: shinzoku.shotokuzei,
+        sonota: sonotaI,
+        gokei: kojoI
+      },
+      shotokuzei: {
+        kazei: kazei,
+        zeiritsu: zeiritsu[1],
+        zeigaku: zeigaku,
+        zeigakuKojo: zeigakuKojo,
+        fukko: fukko,
+        nenzei: nenzei,
+        gensen: input.gensen,
+        yotei: input.yotei,
+        sashihiki: sashihiki
+      },
+      juminzei: {
+        kojo: kojoJ,
+        kazei: kazeiJ,
+        shotokuwari: shotokuwari,
+        chosei: chosei,
+        kifu: kifuJ,
+        jutaku: jutakuJ,
+        kintowari: kintowari,
+        gokei: juminzei
+      },
+      furusatoJogen: furusatoJogen,
+      matome: {
+        shunyu: shunyu,
+        futan: futan,
+        tedori: Math.max(0, shunyu - futan),
+        jikkoZeiritsu: shunyu > 0 ? (nenzei + juminzei) / shunyu : 0
+      }
+    };
+  }
+
+  return {
+    RULES: RULES,
+    emptyInput: emptyInput,
+    simulate: simulate
+  };
+});
+</script>
 <script>
 (function(){
   "use strict";
+  // 金額・人数の欄（特定親族の欄も含む）
+  var AMOUNT_FIELDS = ".money-field input[type=text], input[type=text].count-field";
   var YEN = function(n){ return Math.round(n).toLocaleString("ja-JP"); };
 
   function el(id){ return document.getElementById(id); }
+  // 欄の文字から数値を読む。数字と小数点以外（カンマなど）は無視し、minus が false なら負号も無視する
+  function parseNumber(text, minus){
+    return parseFloat(String(text).replace(minus ? /[^0-9.\-]/g : /[^0-9.]/g, ""));
+  }
   function raw(id){
     var e = el(id);
-    if(!e) return 0;
-    var v = String(e.value).replace(/[^0-9.\-]/g,"");
-    var n = parseFloat(v);
+    var n = e ? parseNumber(e.value, true) : 0;
     return isFinite(n) ? n : 0;
   }
   function pos(id){ return Math.max(0, Math.round(raw(id))); }
@@ -652,141 +1245,33 @@ dl{margin:0}
   function setText(id, txt){ var e = el(id); if(e) e.textContent = txt; }
   function setYen(id, n){ setText(id, YEN(n)); }
   function showRow(id, on){ var e = el(id); if(e) e.hidden = !on; }
-
-  /* ---------- 令和7年分の各種テーブル ---------- */
-
-  // 給与所得控除（令和7年分：最低保障65万円）
-  function kyuyoKojo(r){
-    if(r <= 1900000) return Math.min(r, 650000);
-    if(r <= 3600000) return r * 0.3 + 80000;
-    if(r <= 6600000) return r * 0.2 + 440000;
-    if(r <= 8500000) return r * 0.1 + 1100000;
-    return 1950000;
+  // 欄を3桁区切りに整える。数値として読めない値は、clearInvalid なら空欄にし、そうでなければ残す
+  function formatField(input, clearInvalid){
+    var n = parseNumber(input.value, true);
+    if(isFinite(n)) input.value = Math.round(n).toLocaleString("ja-JP");
+    else if(clearInvalid) input.value = "";
+  }
+  // 計算できないときは、結果欄に理由を出し、内訳の数字は消す（古い結果を残さない）
+  function showError(message){
+    el("verdict").classList.add("is-due");
+    setText("v-badge", "エラー");
+    setText("v-title", "計算できませんでした");
+    setText("v-amount", "—");
+    setText("v-sub", message);
+    setText("r-rate-note", "");
+    var outs = document.querySelectorAll(".results dd, #f-limit");
+    for(var i = 0; i < outs.length; i++){ outs[i].textContent = "—"; }
   }
 
-  // 公的年金等控除（他の所得の合計に応じて3区分）
-  function nenkinKojo(shunyu, over65, otherShotoku){
-    if(shunyu <= 0) return 0;
-    var shift = otherShotoku <= 10000000 ? 0 : (otherShotoku <= 20000000 ? 100000 : 200000);
-    var min = (over65 ? 1100000 : 600000) - shift;
-    var v;
-    if(over65 ? shunyu <= 3300000 : shunyu <= 1300000){
-      v = min;
-    } else if(shunyu <= 4100000){
-      v = shunyu * 0.25 + 275000 - shift;
-    } else if(shunyu <= 7700000){
-      v = shunyu * 0.15 + 685000 - shift;
-    } else if(shunyu <= 10000000){
-      v = shunyu * 0.05 + 1455000 - shift;
-    } else {
-      v = 1955000 - shift;
-    }
-    return Math.max(min, Math.min(v, shunyu));
-  }
-
-  // 基礎控除（令和7年分・上乗せ特例込み）
-  function kisoKojo(gokei){
-    if(gokei <=  1320000) return 950000;
-    if(gokei <=  3360000) return 880000;
-    if(gokei <=  4890000) return 680000;
-    if(gokei <=  6550000) return 630000;
-    if(gokei <= 23500000) return 580000;
-    if(gokei <= 24000000) return 480000;
-    if(gokei <= 24500000) return 320000;
-    if(gokei <= 25000000) return 160000;
-    return 0;
-  }
-  function kisoKojoJumin(gokei){
-    if(gokei <= 24000000) return 430000;
-    if(gokei <= 24500000) return 290000;
-    if(gokei <= 25000000) return 150000;
-    return 0;
-  }
-
-  // 生命保険料控除
-  function lifeNew(x){
-    if(x <= 0) return 0;
-    if(x <=  20000) return x;
-    if(x <=  40000) return x / 2 + 10000;
-    if(x <=  80000) return x / 4 + 20000;
-    return 40000;
-  }
-  function lifeOld(x){
-    if(x <= 0) return 0;
-    if(x <=  25000) return x;
-    if(x <=  50000) return x / 2 + 12500;
-    if(x <= 100000) return x / 4 + 25000;
-    return 50000;
-  }
-  function lifeNewJ(x){
-    if(x <= 0) return 0;
-    if(x <= 12000) return x;
-    if(x <= 32000) return x / 2 + 6000;
-    if(x <= 56000) return x / 4 + 14000;
-    return 28000;
-  }
-  function lifeOldJ(x){
-    if(x <= 0) return 0;
-    if(x <= 15000) return x;
-    if(x <= 40000) return x / 2 + 7500;
-    if(x <= 70000) return x / 4 + 17500;
-    return 35000;
-  }
-  function lifeCat(n, o, isJumin){
-    var fn = isJumin ? lifeNewJ : lifeNew;
-    var fo = isJumin ? lifeOldJ : lifeOld;
-    var cap = isJumin ? 28000 : 40000;
-    if(n > 0 && o > 0) return Math.max(fo(o), Math.min(cap, fn(n) + fo(o)));
-    if(o > 0) return fo(o);
-    return fn(n);
-  }
-
-  // 配偶者特別控除（配偶者の合計所得の区分ごと）
-  var SPT = [
-    [ 950000, 380000, 260000, 130000, 330000, 220000, 110000],
-    [1000000, 360000, 240000, 120000, 330000, 220000, 110000],
-    [1050000, 310000, 210000, 110000, 310000, 210000, 110000],
-    [1100000, 260000, 180000,  90000, 260000, 180000,  90000],
-    [1150000, 210000, 140000,  70000, 210000, 140000,  70000],
-    [1200000, 160000, 110000,  60000, 160000, 110000,  60000],
-    [1250000, 110000,  80000,  40000, 110000,  80000,  40000],
-    [1300000,  60000,  40000,  20000,  60000,  40000,  20000],
-    [1330000,  30000,  20000,  10000,  30000,  20000,  10000]
-  ];
-
-  // 特定親族特別控除（親族の合計所得の区分ごと）
-  var KIN = [
-    [ 850000, 630000, 450000],
-    [ 900000, 610000, 450000],
-    [ 950000, 510000, 450000],
-    [1000000, 410000, 410000],
-    [1050000, 310000, 310000],
-    [1100000, 210000, 210000],
-    [1150000, 110000, 110000],
-    [1200000,  60000,  60000],
-    [1230000,  30000,  30000]
-  ];
-
-  // 所得税の速算表
-  var RATES = [
-    [ 1950000, 0.05,       0],
-    [ 3300000, 0.10,   97500],
-    [ 6950000, 0.20,  427500],
-    [ 9000000, 0.23,  636000],
-    [18000000, 0.33, 1536000],
-    [40000000, 0.40, 2796000],
-    [Infinity, 0.45, 4796000]
-  ];
-  function rateRow(kazei){
-    for(var i = 0; i < RATES.length; i++){
-      if(kazei <= RATES[i][0]) return RATES[i];
-    }
-    return RATES[RATES.length - 1];
+  var RULES = typeof TaxEngine !== "undefined" && TaxEngine.RULES && TaxEngine.RULES.R7;
+  if(!RULES){
+    showError("計算エンジンを読み込めませんでした。index.html の計算エンジン部分（script id=\"tax-engine\"）にエラーがないか確認してください。");
+    return;
   }
 
   /* ---------- 特定親族の行 ---------- */
   var kinList = el("kin-list");
-  function addKinRow(value){
+  function addKinRow(){
     var row = document.createElement("div");
     row.className = "kin-row";
     var field = document.createElement("div");
@@ -795,7 +1280,6 @@ dl{margin:0}
     input.type = "text";
     input.inputMode = "numeric";
     input.className = "kin-input";
-    input.value = value == null ? "" : value;
     input.setAttribute("aria-label", "特定親族の合計所得金額");
     var unit = document.createElement("span");
     unit.className = "unit";
@@ -806,298 +1290,132 @@ dl{margin:0}
     del.type = "button";
     del.className = "btn btn-x";
     del.textContent = "削除";
-    del.addEventListener("click", function(){ row.remove(); calc(); });
+    del.addEventListener("click", function(){ row.remove(); update(); });
     row.appendChild(field);
     row.appendChild(del);
     kinList.appendChild(row);
-    input.addEventListener("input", calc);
   }
-  el("btn-add-kin").addEventListener("click", function(){ addKinRow(""); calc(); });
+  el("btn-add-kin").addEventListener("click", function(){ addKinRow(); update(); });
 
-  function kinShotokuList(){
-    var out = [];
-    var inputs = kinList.querySelectorAll(".kin-input");
-    for(var i = 0; i < inputs.length; i++){
-      var v = parseFloat(String(inputs[i].value).replace(/[^0-9.]/g, ""));
-      if(isFinite(v) && v > 0) out.push(v);
+  /* ---------- 入力の読み取り ---------- */
+  function readInput(){
+    var kins = [];
+    var kinInputs = kinList.querySelectorAll(".kin-input");
+    for(var i = 0; i < kinInputs.length; i++){
+      var v = parseNumber(kinInputs[i].value, false);
+      if(isFinite(v) && v > 0) kins.push(v);
     }
-    return out;
+    return {
+      kyuyoShunyu: pos("i-kyuyo"),
+      gensen: pos("i-gensen"),
+      jigyoShunyu: raw("i-jigyo-in"),
+      jigyoKeihi: raw("i-jigyo-hi"),
+      fudosanShunyu: raw("i-fudosan-in"),
+      fudosanKeihi: raw("i-fudosan-hi"),
+      aoiro: parseFloat(el("i-aoiro").value) || 0,
+      nenkinShunyu: pos("i-nenkin"),
+      over65: el("i-age").value === "over",
+      zatsu: pos("i-zatsu"),
+      ichijiShunyu: raw("i-ichiji-in"),
+      ichijiShishutsu: raw("i-ichiji-hi"),
+      shakai: pos("i-shakai"),
+      kakekin: pos("i-kakekin"),
+      seimei: {
+        ippanShin: pos("i-life-gn"),
+        ippanKyu: pos("i-life-go"),
+        kaigo: pos("i-life-k"),
+        nenkinShin: pos("i-life-nn"),
+        nenkinKyu: pos("i-life-no")
+      },
+      jishin: pos("i-jishin"),
+      choki: pos("i-choki"),
+      iryo: { self: radio("med") === "self", shiharai: pos("i-iryo"), hoten: pos("i-hoten"), otc: pos("i-self") },
+      furusato: pos("i-furusato"),
+      sonotaKifu: pos("i-kifu"),
+      haigu: { ari: radio("sp") === "yes", shotoku: pos("i-sp-shotoku"), rojin: checked("i-sp-old") },
+      fuyo: { ippan: pos("i-f-ippan"), tokutei: pos("i-f-tokutei"), dokyo: pos("i-f-doukyo"), rojin: pos("i-f-rojin") },
+      tokuteiShinzoku: kins,
+      shogai: { ippan: pos("i-sho-ippan"), tokubetsu: pos("i-sho-toku"), dokyo: pos("i-sho-dou") },
+      hitori: radio("hitori"),
+      kinro: checked("i-kinro"),
+      choseiYoken: checked("i-chosei"),
+      jutaku: pos("i-jutaku"),
+      zeigakuKojo: pos("i-zeigaku"),
+      yotei: pos("i-yotei")
+    };
   }
 
-  /* ---------- メインの計算 ---------- */
-  function calc(){
-    // --- 収入と所得 ---
-    var kyuyoIn   = pos("i-kyuyo");
-    var kyuyoK    = kyuyoIn > 0 ? kyuyoKojo(kyuyoIn) : 0;
-    var kyuyoS    = Math.max(0, kyuyoIn - kyuyoK);
+  /* ---------- 結果の表示 ---------- */
+  function render(r){
+    var s = r.shotoku, k = r.kojo, t = r.shotokuzei, j = r.juminzei, m = r.matome;
 
-    var jigyo     = raw("i-jigyo-in") - raw("i-jigyo-hi");
-    var fudosan   = raw("i-fudosan-in") - raw("i-fudosan-hi");
-    var jigyoSum  = jigyo + fudosan;
-    var aoiro     = Math.min(parseFloat(el("i-aoiro").value) || 0, Math.max(0, jigyoSum));
-    jigyoSum      = jigyoSum - aoiro;
-
-    var zatsuOther = pos("i-zatsu");
-    var ichijiNet  = Math.max(0, raw("i-ichiji-in") - raw("i-ichiji-hi") - 500000);
-    var ichijiS    = ichijiNet / 2;
-
-    var nenkinIn  = pos("i-nenkin");
-    var over65    = el("i-age").value === "over";
-    var otherForNenkin = kyuyoS + jigyoSum + zatsuOther + ichijiS;
-    var nenkinK   = nenkinKojo(nenkinIn, over65, otherForNenkin);
-    var nenkinS   = Math.max(0, nenkinIn - nenkinK);
-
-    // 所得金額調整控除
-    var chosei1 = 0;
-    if(checked("i-chosei") && kyuyoIn > 8500000){
-      chosei1 = (Math.min(kyuyoIn, 10000000) - 8500000) * 0.1;
-    }
-    var kyuyoAdj = Math.max(0, kyuyoS - chosei1);
-    var chosei2 = 0;
-    if(kyuyoAdj > 0 && nenkinS > 0){
-      chosei2 = Math.max(0, Math.min(kyuyoAdj, 100000) + Math.min(nenkinS, 100000) - 100000);
-    }
-    var kyuyoFinal = Math.max(0, kyuyoAdj - Math.min(chosei2, kyuyoAdj));
-    var choseiTotal = chosei1 + chosei2;
-
-    var gokeiShotoku = Math.max(0, kyuyoFinal + jigyoSum + nenkinS + zatsuOther + ichijiS);
-
-    // --- 所得控除 ---
-    var shakai = pos("i-shakai");
-    var kkojo  = pos("i-idkeco");
-
-    var lifeI = lifeCat(pos("i-life-gn"), pos("i-life-go"), false)
-              + lifeCat(pos("i-life-k"), 0, false)
-              + lifeCat(pos("i-life-nn"), pos("i-life-no"), false);
-    lifeI = Math.min(120000, lifeI);
-    var lifeJ = lifeCat(pos("i-life-gn"), pos("i-life-go"), true)
-              + lifeCat(pos("i-life-k"), 0, true)
-              + lifeCat(pos("i-life-nn"), pos("i-life-no"), true);
-    lifeJ = Math.min(70000, lifeJ);
-
-    var jishinIn = pos("i-jishin");
-    var chokiIn  = pos("i-choki");
-    var chokiI = chokiIn <= 0 ? 0 : (chokiIn <= 10000 ? chokiIn : (chokiIn <= 20000 ? chokiIn / 2 + 5000 : 15000));
-    var jishinI = Math.min(50000, Math.min(50000, jishinIn) + chokiI);
-    var chokiJ = chokiIn <= 0 ? 0 : (chokiIn <= 5000 ? chokiIn : (chokiIn <= 15000 ? chokiIn / 2 + 2500 : 10000));
-    var jishinJ = Math.min(25000, Math.min(25000, jishinIn * 0.5) + chokiJ);
-
-    var medMode = radio("med");
-    var iryo = 0;
-    if(medMode === "self"){
-      iryo = Math.min(88000, Math.max(0, pos("i-self") - 12000));
-    } else {
-      var floorAmt = Math.min(100000, gokeiShotoku * 0.05);
-      iryo = Math.min(2000000, Math.max(0, pos("i-iryo") - pos("i-hoten") - floorAmt));
-    }
-
-    var furusato = pos("i-furusato");
-    var kifuOther = pos("i-kifu");
-    var kifuTotal = furusato + kifuOther;
-    var kifu = Math.max(0, Math.min(kifuTotal, gokeiShotoku * 0.4) - 2000);
-
-    // 配偶者控除・配偶者特別控除
-    var hasSpouse = radio("sp") === "yes";
-    var spS = hasSpouse ? pos("i-sp-shotoku") : 0;
-    var spOld = checked("i-sp-old");
-    var tier = gokeiShotoku <= 9000000 ? 0 : (gokeiShotoku <= 9500000 ? 1 : (gokeiShotoku <= 10000000 ? 2 : -1));
-    var haiguI = 0, haiguJ = 0, haiguLabel = "配偶者控除", haiguDiff = 0;
-    if(hasSpouse && tier >= 0){
-      if(spS <= 580000){
-        haiguI = spOld ? [480000,320000,160000][tier] : [380000,260000,130000][tier];
-        haiguJ = spOld ? [380000,260000,130000][tier] : [330000,220000,110000][tier];
-        haiguDiff = spOld ? [100000,60000,30000][tier] : [50000,40000,20000][tier];
-      } else if(spS <= 1330000){
-        haiguLabel = "配偶者特別控除";
-        for(var i = 0; i < SPT.length; i++){
-          if(spS <= SPT[i][0]){
-            haiguI = SPT[i][1 + tier];
-            haiguJ = SPT[i][4 + tier];
-            break;
-          }
-        }
-        if(spS <= 950000) haiguDiff = [50000,40000,20000][tier];
-      }
-    }
-
-    // 扶養控除
-    var nIppan = pos("i-f-ippan"), nToku = pos("i-f-tokutei");
-    var nDou = pos("i-f-doukyo"), nRoj = pos("i-f-rojin");
-    var fuyoI = nIppan * 380000 + nToku * 630000 + nDou * 580000 + nRoj * 480000;
-    var fuyoJ = nIppan * 330000 + nToku * 450000 + nDou * 450000 + nRoj * 380000;
-    var fuyoDiff = nIppan * 50000 + nToku * 180000 + nDou * 130000 + nRoj * 100000;
-
-    // 特定親族特別控除
-    var kinI = 0, kinJ = 0, kinDiff = 0;
-    var kins = kinShotokuList();
-    for(var k = 0; k < kins.length; k++){
-      var s = kins[k];
-      if(s <= 580000 || s > 1230000) continue;
-      for(var j = 0; j < KIN.length; j++){
-        if(s <= KIN[j][0]){
-          kinI += KIN[j][1];
-          kinJ += KIN[j][2];
-          if(s <= 950000) kinDiff += 180000;
-          break;
-        }
-      }
-    }
-
-    // 障害者・寡婦・ひとり親・勤労学生
-    var sI = pos("i-sho-ippan"), sT = pos("i-sho-toku"), sD = pos("i-sho-dou");
-    var shoI = sI * 270000 + sT * 400000 + sD * 750000;
-    var shoJ = sI * 260000 + sT * 300000 + sD * 530000;
-    var shoDiff = sI * 10000 + sT * 100000 + sD * 220000;
-    var hitori = radio("hitori");
-    var hitoriI = hitori === "hitorioya" ? 350000 : (hitori === "kafu" ? 270000 : 0);
-    var hitoriJ = hitori === "hitorioya" ? 300000 : (hitori === "kafu" ? 260000 : 0);
-    var hitoriDiff = hitori === "hitorioya" ? 50000 : (hitori === "kafu" ? 10000 : 0);
-    var kinroI = checked("i-kinro") ? 270000 : 0;
-    var kinroJ = checked("i-kinro") ? 260000 : 0;
-    var kinroDiff = checked("i-kinro") ? 10000 : 0;
-    var sonotaI = shoI + hitoriI + kinroI;
-    var sonotaJ = shoJ + hitoriJ + kinroJ;
-
-    var kiso  = kisoKojo(gokeiShotoku);
-    var kisoJ = kisoKojoJumin(gokeiShotoku);
-
-    var kojoI = kiso + shakai + kkojo + lifeI + jishinI + iryo + kifu + haiguI + fuyoI + kinI + sonotaI;
-    var kojoJ = kisoJ + shakai + kkojo + lifeJ + jishinJ + iryo + haiguJ + fuyoJ + kinJ + sonotaJ;
-
-    // --- 所得税額 ---
-    var kazei = Math.max(0, Math.floor((gokeiShotoku - kojoI) / 1000) * 1000);
-    var rr = rateRow(kazei);
-    var zeigaku = Math.max(0, kazei * rr[1] - rr[2]);
-
-    var jutaku = pos("i-jutaku");
-    var otherCredit = pos("i-zeigaku");
-    var creditUsed = Math.min(zeigaku, otherCredit + jutaku);
-    var jutakuUsed = Math.max(0, Math.min(jutaku, zeigaku - Math.min(zeigaku, otherCredit)));
-    var jutakuLeft = jutaku - jutakuUsed;
-
-    var kijun = Math.max(0, zeigaku - creditUsed);
-    var fukko = Math.floor(kijun * 0.021);
-    var nenzei = Math.floor((kijun + fukko) / 100) * 100;
-
-    var gensen = pos("i-gensen");
-    var yotei  = pos("i-yotei");
-    var sashihiki = nenzei - gensen - yotei;
-
-    // --- 住民税（概算） ---
-    var kazeiJ = Math.max(0, Math.floor((gokeiShotoku - kojoJ) / 1000) * 1000);
-    var shotokuwari = kazeiJ * 0.10;
-
-    var jinteki = 50000 + haiguDiff + fuyoDiff + kinDiff + shoDiff + hitoriDiff + kinroDiff;
-    var choseiKojo = 0;
-    if(kazeiJ > 0){
-      if(kazeiJ <= 2000000){
-        choseiKojo = Math.min(jinteki, kazeiJ) * 0.05;
-      } else {
-        choseiKojo = Math.max(50000, jinteki - (kazeiJ - 2000000)) * 0.05;
-      }
-    }
-    var wariAfterChosei = Math.max(0, shotokuwari - choseiKojo);
-
-    // ふるさと納税の住民税控除
-    var marginal = rr[1];
-    var furusatoJ = 0;
-    if(furusato > 0){
-      var kihon = Math.max(0, Math.min(furusato, gokeiShotoku * 0.3) - 2000) * 0.10;
-      var tokureiCap = wariAfterChosei * 0.2;
-      var tokurei = Math.min(tokureiCap, Math.max(0, furusato - 2000) * (0.9 - marginal * 1.021));
-      furusatoJ = kihon + tokurei;
-    }
-
-    // 住宅ローン控除の住民税分
-    var jutakuJ = 0;
-    if(jutakuLeft > 0){
-      jutakuJ = Math.min(jutakuLeft, Math.min(kazei * 0.05, 97500));
-    }
-
-    var wariFinal = Math.max(0, wariAfterChosei - furusatoJ - jutakuJ);
-    var fuyoCount = nIppan + nToku + nDou + nRoj + kins.length;
-    var people = 1 + (hasSpouse && spS <= 580000 ? 1 : 0) + fuyoCount;
-    var hikazeiLine = people > 1 ? (350000 * people + 100000 + 210000) : 450000;
-    var kintoWari = gokeiShotoku <= hikazeiLine ? 0 : 5000;
-    var juminTotal = Math.floor((wariFinal + kintoWari) / 100) * 100;
-
-    // ふるさと納税の上限目安（寄附額0のときの所得割で算出）
-    var baseWari = wariAfterChosei;
-    if(furusato > 0){
-      var kojoINo = kojoI - kifu + Math.max(0, Math.min(kifuOther, gokeiShotoku * 0.4) - 2000);
-      var kazeiNo = Math.max(0, Math.floor((gokeiShotoku - kojoJ) / 1000) * 1000);
-      baseWari = Math.max(0, kazeiNo * 0.10 - choseiKojo);
-      var rrNo = rateRow(Math.max(0, Math.floor((gokeiShotoku - kojoINo) / 1000) * 1000));
-      marginal = rrNo[1];
-    }
-    var denom = 0.9 - marginal * 1.021;
-    var furusatoLimit = (baseWari > 0 && denom > 0) ? Math.floor((baseWari * 0.2 / denom + 2000) / 1000) * 1000 : 0;
-
-    // --- 表示 ---
-    var isDue = sashihiki > 0;
-    var v = el("verdict");
-    v.classList.toggle("is-due", isDue);
+    var isDue = t.sashihiki > 0;
+    el("verdict").classList.toggle("is-due", isDue);
     setText("v-badge", isDue ? "納付" : "還付");
     setText("v-title", isDue ? "申告により納める税金" : "申告により戻ってくる税金");
-    setText("v-amount", YEN(Math.abs(sashihiki)));
+    setText("v-amount", YEN(Math.abs(t.sashihiki)));
     setText("v-sub", isDue
-      ? "年税額 " + YEN(nenzei) + "円 から源泉徴収・予定納税分を差し引いた不足額です"
-      : (sashihiki === 0 ? "過不足はありません" : "年税額 " + YEN(nenzei) + "円 に対する納めすぎの分です"));
+      ? "年税額 " + YEN(t.nenzei) + "円 から源泉徴収・予定納税分を差し引いた不足額です"
+      : (t.sashihiki === 0 ? "過不足はありません" : "年税額 " + YEN(t.nenzei) + "円 に対する納めすぎの分です"));
 
-    setYen("r-kyuyo-shotoku", kyuyoFinal);
-    setYen("r-kyuyo-kojo", kyuyoK);
-    setYen("r-jigyo", jigyoSum);      showRow("row-jigyo", jigyoSum !== 0);
-    setYen("r-nenkin", nenkinS);      showRow("row-nenkin", nenkinIn > 0);
-    setYen("r-zatsu", zatsuOther);    showRow("row-zatsu", zatsuOther > 0);
-    setYen("r-ichiji", ichijiS);      showRow("row-ichiji", ichijiS > 0);
-    setYen("r-chosei", choseiTotal);  showRow("row-chosei", choseiTotal > 0);
-    setYen("r-gokei", gokeiShotoku);
+    setText("r-iryo-label", k.iryoSelf ? "セルフメディケーション税制" : "医療費控除");
+    setText("r-haigu-label", k.haiguTokubetsu ? "配偶者特別控除" : "配偶者控除");
+    setText("r-rate-note", t.kazei > 0 ? "（税率 " + Math.round(t.zeiritsu * 100) + "%）" : "");
 
-    setYen("r-kojo-gokei", kojoI);
-    setYen("r-kiso", kiso);
-    setYen("r-shakai", shakai);
-    setYen("r-kkojo", kkojo);         showRow("row-kkojo", kkojo > 0);
-    setYen("r-life", lifeI);          showRow("row-life", lifeI > 0);
-    setYen("r-jishin", jishinI);      showRow("row-jishin", jishinI > 0);
-    setText("r-iryo-label", medMode === "self" ? "セルフメディケーション税制" : "医療費控除");
-    setYen("r-iryo", iryo);           showRow("row-iryo", iryo > 0);
-    setYen("r-kifu", kifu);           showRow("row-kifu", kifu > 0);
-    setText("r-haigu-label", haiguLabel);
-    setYen("r-haigu", haiguI);        showRow("row-haigu", haiguI > 0);
-    setYen("r-fuyo", fuyoI);          showRow("row-fuyo", fuyoI > 0);
-    setYen("r-kin", kinI);            showRow("row-kin", kinI > 0);
-    setYen("r-sonota", sonotaI);      showRow("row-sonota", sonotaI > 0);
+    // [表示先, 金額, 行, 行を出す条件]。行の指定が無いものは常に表示
+    var lines = [
+      ["r-kyuyo-shotoku", s.kyuyo],
+      ["r-kyuyo-kojo",    s.kyuyoKojo],
+      ["r-jigyo",   s.jigyo,   "row-jigyo",  s.jigyo !== 0],
+      ["r-nenkin",  s.nenkin,  "row-nenkin", s.nenkinShunyu > 0],
+      ["r-zatsu",   s.zatsu,   "row-zatsu",  s.zatsu > 0],
+      ["r-ichiji",  s.ichiji,  "row-ichiji", s.ichiji > 0],
+      ["r-chosei",  s.chosei,  "row-chosei", s.chosei > 0],
+      ["r-gokei",   s.gokei],
 
-    setYen("r-kazei", kazei);
-    setYen("r-zeigaku", zeigaku);
-    setText("r-rate-note", kazei > 0 ? "（税率 " + Math.round(rr[1] * 100) + "%）" : "");
-    setYen("r-zeikojo", creditUsed);  showRow("row-zeikojo", creditUsed > 0);
-    setYen("r-fukko", fukko);
-    setYen("r-nenzei", nenzei);
-    setYen("r-gensen", gensen);
-    setYen("r-yotei", yotei);         showRow("row-yotei", yotei > 0);
+      ["r-kojo-gokei", k.gokei],
+      ["r-kiso",    k.kiso],
+      ["r-shakai",  k.shakai],
+      ["r-kkojo",   k.kakekin, "row-kkojo",  k.kakekin > 0],
+      ["r-life",    k.seimei,  "row-life",   k.seimei > 0],
+      ["r-jishin",  k.jishin,  "row-jishin", k.jishin > 0],
+      ["r-iryo",    k.iryo,    "row-iryo",   k.iryo > 0],
+      ["r-kifu",    k.kifu,    "row-kifu",   k.kifu > 0],
+      ["r-haigu",   k.haigu,   "row-haigu",  k.haigu > 0],
+      ["r-fuyo",    k.fuyo,    "row-fuyo",   k.fuyo > 0],
+      ["r-kin",     k.tokuteiShinzoku, "row-kin", k.tokuteiShinzoku > 0],
+      ["r-sonota",  k.sonota,  "row-sonota", k.sonota > 0],
 
-    setYen("j-kazei", kazeiJ);
-    setYen("j-kojo", kojoJ);
-    setYen("j-shotokuwari", Math.round(shotokuwari));
-    setYen("j-chosei", Math.round(choseiKojo));
-    setYen("j-kifu", Math.round(furusatoJ));   showRow("j-row-kifu", furusatoJ > 0);
-    setYen("j-jutaku", Math.round(jutakuJ));   showRow("j-row-jutaku", jutakuJ > 0);
-    setYen("j-kinto", kintoWari);
-    setYen("j-total", juminTotal);
+      ["r-kazei",   t.kazei],
+      ["r-zeigaku", t.zeigaku],
+      ["r-zeikojo", t.zeigakuKojo, "row-zeikojo", t.zeigakuKojo > 0],
+      ["r-fukko",   t.fukko],
+      ["r-nenzei",  t.nenzei],
+      ["r-gensen",  t.gensen],
+      ["r-yotei",   t.yotei,   "row-yotei",  t.yotei > 0],
 
-    setText("f-limit", "¥" + YEN(furusatoLimit));
+      ["j-kazei",       j.kazei],
+      ["j-kojo",        j.kojo],
+      ["j-shotokuwari", j.shotokuwari],
+      ["j-chosei",      j.chosei],
+      ["j-kifu",        j.kifu,   "j-row-kifu",   j.kifu > 0],
+      ["j-jutaku",      j.jutaku, "j-row-jutaku", j.jutaku > 0],
+      ["j-kinto",       j.kintowari],
+      ["j-total",       j.gokei]
+    ];
+    lines.forEach(function(line){
+      setYen(line[0], line[1]);
+      if(line[2]) showRow(line[2], line[3]);
+    });
 
-    var shunyuTotal = kyuyoIn + (raw("i-jigyo-in") - raw("i-jigyo-hi")) + (raw("i-fudosan-in") - raw("i-fudosan-hi"))
-                    + nenkinIn + zatsuOther + Math.max(0, raw("i-ichiji-in") - raw("i-ichiji-hi"));
-    var burden = shakai + nenzei + juminTotal;
-    setText("s-burden", "¥" + YEN(burden));
-    setText("s-tedori", "¥" + YEN(Math.max(0, shunyuTotal - burden)));
-    setText("s-rate", shunyuTotal > 0 ? ((nenzei + juminTotal) / shunyuTotal * 100).toFixed(1) + "%" : "0.0%");
-    setText("s-marginal", Math.round(rr[1] * 100) + "%");
+    setText("f-limit", "¥" + YEN(r.furusatoJogen));
+    setText("s-burden", "¥" + YEN(m.futan));
+    setText("s-tedori", "¥" + YEN(m.tedori));
+    setText("s-rate", (m.jikkoZeiritsu * 100).toFixed(1) + "%");
+    setText("s-marginal", Math.round(t.zeiritsu * 100) + "%");
   }
 
-  /* ---------- 表示の出し分け ---------- */
+  /* ---------- 表示の出し分けと再計算 ---------- */
   function syncVisibility(){
     var med = radio("med");
     var rows = document.querySelectorAll("[data-med]");
@@ -1109,38 +1427,37 @@ dl{margin:0}
     for(var j = 0; j < sprows.length; j++){ sprows[j].hidden = !sp; }
   }
 
-  document.addEventListener("input", function(){ syncVisibility(); calc(); });
-  document.addEventListener("change", function(){ syncVisibility(); calc(); });
+  function update(){
+    syncVisibility();
+    try {
+      render(TaxEngine.simulate(readInput(), RULES));
+    } catch(err){
+      console.error(err);
+      showError(err.message);
+    }
+  }
 
+  document.addEventListener("input", update);
+  document.addEventListener("change", update);
+
+  // 金額・人数の欄をすべて0にし、特定親族の行と記入例の案内を消す
   el("btn-clear").addEventListener("click", function(){
-    var ids = ["i-kyuyo","i-gensen","i-jigyo-in","i-jigyo-hi","i-fudosan-in","i-fudosan-hi",
-               "i-nenkin","i-zatsu","i-ichiji-in","i-ichiji-hi","i-shakai","i-idkeco",
-               "i-life-gn","i-life-go","i-life-k","i-life-nn","i-life-no","i-jishin","i-choki",
-               "i-iryo","i-hoten","i-self","i-furusato","i-kifu","i-sp-shotoku",
-               "i-f-ippan","i-f-tokutei","i-f-doukyo","i-f-rojin",
-               "i-sho-ippan","i-sho-toku","i-sho-dou","i-jutaku","i-zeigaku","i-yotei"];
-    for(var i = 0; i < ids.length; i++){ var e = el(ids[i]); if(e) e.value = "0"; }
+    var fields = document.querySelectorAll(AMOUNT_FIELDS);
+    for(var i = 0; i < fields.length; i++){ fields[i].value = "0"; }
     kinList.innerHTML = "";
     var flag = document.querySelector(".sample-flag");
     if(flag) flag.hidden = true;
-    calc();
+    update();
   });
 
   // 金額欄は入力から離れたときに3桁区切りで整えます
   document.addEventListener("focusout", function(ev){
     var t = ev.target;
-    if(!t || t.tagName !== "INPUT" || t.type !== "text") return;
-    if(!t.closest(".money-field") && !t.classList.contains("count-field")) return;
-    var v = String(t.value).replace(/[^0-9.\-]/g, "");
-    var n = parseFloat(v);
-    t.value = isFinite(n) ? Math.round(n).toLocaleString("ja-JP") : "";
+    if(t && t.matches && t.matches(AMOUNT_FIELDS)) formatField(t, true);
   });
-  syncVisibility();
-  calc();
-  var initial = document.querySelectorAll(".money-field input, .count-field");
-  for(var q = 0; q < initial.length; q++){
-    var nv = parseFloat(String(initial[q].value).replace(/[^0-9.\-]/g, ""));
-    if(isFinite(nv)) initial[q].value = Math.round(nv).toLocaleString("ja-JP");
-  }
+
+  update();
+  var initial = document.querySelectorAll(AMOUNT_FIELDS);
+  for(var q = 0; q < initial.length; q++){ formatField(initial[q], false); }
 })();
 </script>
